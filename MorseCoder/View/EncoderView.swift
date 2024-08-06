@@ -99,6 +99,7 @@ struct EncoderView_Previews: PreviewProvider {
   }
 }
 
+/*
 struct LabelWithAttributedString: UIViewRepresentable {
   @Binding var dynamicHeight: CGFloat
   var attributedString: NSAttributedString
@@ -120,3 +121,4 @@ struct LabelWithAttributedString: UIViewRepresentable {
     }
   }
 }
+*/

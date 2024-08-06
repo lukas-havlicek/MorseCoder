@@ -73,9 +73,9 @@ struct EncoderView: View {
     let attributedtext = NSMutableAttributedString(string: "")
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = -15
-    let aDot: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 30, weight: .bold), .baselineOffset: 6.5, .paragraphStyle: paragraphStyle, .foregroundColor: colorScheme == .dark ? UIColor.white : UIColor.black]
-    let aDash: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 30, weight: .bold), .paragraphStyle: paragraphStyle, .foregroundColor: colorScheme == .dark ? UIColor.white : UIColor.black]
-    let aOther: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 30, weight: .regular), .paragraphStyle: paragraphStyle, .foregroundColor: colorScheme == .dark ? UIColor.white : UIColor.black]
+    let aDot: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 30, weight: .bold), .paragraphStyle: paragraphStyle, .foregroundColor: colorScheme == .dark ? UIColor.white : UIColor.black]
+    let aDash: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 30, weight: .bold), .baselineOffset: -6.5, .paragraphStyle: paragraphStyle, .foregroundColor: colorScheme == .dark ? UIColor.white : UIColor.black]
+    let aOther: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 30, weight: .regular), .baselineOffset: -6.5, .paragraphStyle: paragraphStyle, .foregroundColor: colorScheme == .dark ? UIColor.white : UIColor.black]
     text.forEach {
       if $0 == "-" {
         let txt = NSAttributedString(string: "-", attributes: aDash)

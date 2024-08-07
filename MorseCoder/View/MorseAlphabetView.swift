@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MorseAlphabetView: View {
   
+  @Environment(\.dismiss) var dismiss
+  
   var alphabetLetters: [Morse] = []
   var alphabetNumbers: [Morse] = []
   var alphabetSymbols: [Morse] = []
@@ -95,6 +97,16 @@ struct MorseAlphabetView: View {
     }
     .navigationTitle("Morse Alphabet")
     .navigationBarTitleDisplayMode(.inline)
+    .navigationBarBackButtonHidden(true)
+    .toolbar {
+      ToolbarItem(placement: .topBarLeading) {
+        Button {
+          dismiss()
+        } label: {
+          Label("Back", systemImage: "chevron.left")
+        }
+      }
+    }
   }
   
   private func setBaselineOffsetToDot(_ code: String) -> Text {

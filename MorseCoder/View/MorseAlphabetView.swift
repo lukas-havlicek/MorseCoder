@@ -9,24 +9,38 @@ import SwiftUI
 
 struct MorseAlphabetView: View {
   
-  var alphabet: [Morse] = []
+  var alphabetLetters: [Morse] = []
+  var alphabetNumbers: [Morse] = []
+  var alphabetSymbols: [Morse] = []
   
   init() {
     for item in morseAlphabet {
-      let morseLetter = Morse(id: item.key, letter: item.key, code: item.value)
-      alphabet.append(morseLetter)
+      if Character(item.key).isLetter {
+        let morseLetter = Morse(id: item.key, letter: item.key, code: item.value)
+        alphabetLetters.append(morseLetter)
+      }
     }
   }
   
+  let columns = [GridItem(.fixed(120), spacing: 20, alignment: .leading), GridItem(.fixed(120), spacing: 20, alignment: .leading)]
+  
   var body: some View {
-    ScrollView {
-      LazyVGrid(columns: [GridItem(.fixed(20))], alignment: .leading, spacing: 10, pinnedViews: []) {
-        Text("Placeholder")
-        Text("Placeholder")
+    ScrollView(showsIndicators: false) {
+      LazyVGrid(columns: columns, spacing: 10) {
+        ForEach(alphabetLetters.sorted(by: { $0.letter < $1.letter })) { item in
+          HStack {
+            Text(item.letter)
+            Text(item.code)
+          }
+          .font(.system(size: 30, weight: .bold))
+          .padding()
+          .frame(width: 120)
+        }
+        .background(Color.yellow)
       }
     }
     .navigationTitle("Morse Alphabet")
-    .navigationViewStyle(StackNavigationViewStyle())
+    .navigationBarTitleDisplayMode(.inline)
   }
 }
 

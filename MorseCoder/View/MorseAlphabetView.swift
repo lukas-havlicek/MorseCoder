@@ -19,22 +19,23 @@ struct MorseAlphabetView: View {
         let morseLetter = Morse(id: item.key, letter: item.key, code: item.value)
         alphabetLetters.append(morseLetter)
       }
-      if let num = Int(item.key) {
+      if Character(item.key).isNumber {
         let morseNumber = Morse(id: item.key, letter: item.key, code: item.value)
         alphabetNumbers.append(morseNumber)
       }
-      if Character(item.key).isSymbol {
+      if !Character(item.key).isLetter && !Character(item.key).isNumber {
         let morseSymbol = Morse(id: item.key, letter: item.key, code: item.value)
-        alphabetLetters.append(morseSymbol)
+        alphabetSymbols.append(morseSymbol)
       }
     }
   }
   
   let letterColumns = [GridItem(.fixed(120), spacing: 10, alignment: .leading), GridItem(.fixed(120), spacing: 10, alignment: .leading)]
-  let numberColumns = [GridItem(.fixed(150))]
+  let numberColumns = [GridItem(.fixed(160))]
   
   var body: some View {
     ScrollView(showsIndicators: false) {
+      
       LazyVGrid(columns: letterColumns, spacing: 10) {
         ForEach(alphabetLetters.sorted(by: { $0.letter < $1.letter })) { item in
           HStack(spacing: 0) {
@@ -51,7 +52,9 @@ struct MorseAlphabetView: View {
         .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
       }
       
-      Divider()
+      Text("Numbers")
+        .font(.system(size: 20, weight: .bold))
+        .padding(EdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0))
       
       LazyVGrid(columns: numberColumns, spacing: 10) {
         ForEach(alphabetNumbers.sorted(by: { $0.letter < $1.letter })) { item in
@@ -68,6 +71,27 @@ struct MorseAlphabetView: View {
         }
         .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
       }
+      
+      Text("Symbols")
+        .font(.system(size: 20, weight: .bold))
+        .padding(EdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0))
+      
+      LazyVGrid(columns: numberColumns, spacing: 10) {
+        ForEach(alphabetSymbols.sorted(by: { $0.letter < $1.letter })) { item in
+          HStack(spacing: 0) {
+            Text(item.letter).frame(width: 20)
+            Text(":").frame(width: 20)
+            setBaselineOffsetToDot(item.code)
+              .frame(width: 100, alignment: .center)
+              .font(.system(size: 36, weight: .bold))
+          }
+          .font(.system(size: 24, weight: .bold))
+          .padding(.horizontal, 12)
+          .frame(width: 160, alignment: .leading)
+        }
+        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+      }
+      
     }
     .navigationTitle("Morse Alphabet")
     .navigationBarTitleDisplayMode(.inline)

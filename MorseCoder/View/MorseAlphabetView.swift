@@ -8,6 +8,16 @@
 import SwiftUI
 
 struct MorseAlphabetView: View {
+  
+  var alphabet: [Morse] = []
+  
+  init() {
+    for item in morseAlphabet {
+      let morseLetter = Morse(id: item.key, letter: item.key, code: item.value)
+      alphabet.append(morseLetter)
+    }
+  }
+  
   var body: some View {
     ScrollView {
       LazyVGrid(columns: [GridItem(.fixed(20))], alignment: .leading, spacing: 10, pinnedViews: []) {
@@ -22,4 +32,11 @@ struct MorseAlphabetView: View {
 
 #Preview {
   MorseAlphabetView()
+}
+
+
+struct Morse: Identifiable {
+  let id: String
+  let letter: String
+  let code: String
 }

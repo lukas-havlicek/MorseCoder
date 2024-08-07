@@ -32,16 +32,25 @@ struct ContentView: View {
           .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
           .background(colorScheme == .dark ? coderViewModel.coder == .morseEncoder ? Color.white : Color.secondary : coderViewModel.coder == .morseEncoder ? Color.primary : Color.secondary)
           .clipShape(Capsule())
-      }, trailing: Button(action: {
-        coderViewModel.coder = .morseDecoder
-      }) {
-        Text("Decoder")
-          .font(.system(size: 14))
-          .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
-          .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-          .background(colorScheme == .dark ? coderViewModel.coder == .morseDecoder ? Color.white : Color.secondary : coderViewModel.coder == .morseDecoder ? Color.primary : Color.secondary)
-          .clipShape(Capsule())
-      })
+      }, trailing: 
+        HStack {
+          NavigationLink(destination: MorseAlphabetView()) {
+            Image(systemName: "list.bullet.circle.fill")
+              .scaleEffect(CGSize(width: 1.5, height: 1.5))
+              .padding(.trailing, 16)
+          }
+          Button(action: {
+            coderViewModel.coder = .morseDecoder
+          }) {
+            Text("Decoder")
+              .font(.system(size: 14))
+              .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+              .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+              .background(colorScheme == .dark ? coderViewModel.coder == .morseDecoder ? Color.white : Color.secondary : coderViewModel.coder == .morseDecoder ? Color.primary : Color.secondary)
+              .clipShape(Capsule())
+          }
+        }
+      )
     }
     .navigationViewStyle(StackNavigationViewStyle())
     .ignoresSafeArea()

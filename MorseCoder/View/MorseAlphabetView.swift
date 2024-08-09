@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MorseAlphabetView: View {
   
-  @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) private var dismiss
   
   var alphabetLetters: [Morse] = []
   var alphabetNumbers: [Morse] = []
